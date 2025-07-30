@@ -1,6 +1,6 @@
-<?php include '../../partials/header.php' ?>
-<?php include '../../partials/sidebar.php' ?>
-<?php include '../../partials/navbar.php' ?>
+<?php include '../../includes/header.php' ?>
+<?php include '../../includes/sidebar.php' ?>
+<?php include '../../includes/navbar.php' ?>
 <!-- Body main section starts -->
 <main>
     <div class="container-fluid">
@@ -146,4 +146,4 @@
 <!-- Body main section ends -->
 
 
-<?php include '../../partials/footer.php' ?>
+<?php include '../../includes/footer.php' ?>
