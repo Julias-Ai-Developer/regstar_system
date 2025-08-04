@@ -70,9 +70,10 @@
     </div>
 </div>
 
-
 <script src="../../assets/libraries/bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<script src="../../assets/libraries/chat.min.js"></script>
 <script>
     // Sidebar Toggle
     const sidebar = document.getElementById('sidebar');
@@ -265,6 +266,7 @@
         alert('Logging out...'); // Placeholder
     });
 </script>
+<script src="../../assets/js/tablesjs/customtablescript.js"></script>
 </body>
 
 </html>

@@ -1,570 +1,900 @@
+:root {
+  --primary-color: #10b981;
+  --text-primary: #10b981;
+  --text-secondary: hsl(234, 90%, 15%);
+  --background-secondary: #3B448C;
+  --border-color: #e5e7eb;
+  --sidebar-width: 280px;
+  --text-white: #ffffff;
+  --sidebar-collapsed-width: 80px;
+}
 
-    :root {
-      --primary-color: #10b981;
-      --sidebar-bg: #f8fafc;
-      --text-primary: #1f2937;
-      --text-secondary: #6b7280;
-      --border-color: #e5e7eb;
-      --sidebar-width: 280px;
-      --sidebar-collapsed-width: 80px;
+body {
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  background-color: #f9fafb;
+}
+
+.sidebar {
+  height: 100vh;
+  background-color: var(--background-secondary);
+  border-right: 1px solid var(--border-color);
+  width: var(--sidebar-width);
+  /* Default width */
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1030;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar.collapsed {
+  width: var(--sidebar-collapsed-width);
+  /* Collapsed width */
+}
+
+.sidebar .nav {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-bottom: 1rem;
+}
+
+.main-content {
+  margin-left: var(--sidebar-width);
+  /* Default margin for full sidebar */
+  padding: 0;
+  transition: margin-left 0.3s ease;
+  display: flex;
+  /* Added for footer pushing to bottom */
+  flex-direction: column;
+  /* Added for footer pushing to bottom */
+  min-height: 100vh;
+  /* Added for footer pushing to bottom */
+}
+
+.main-content.expanded {
+  margin-left: var(--sidebar-collapsed-width);
+  /* Margin when sidebar is collapsed */
+}
+
+.top-bar {
+  background-color: var(--background-secondary);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.logo i {
+  margin-right: 0.5rem;
+}
+
+.logo-text {
+  transition: opacity 0.3s ease, width 0.3s ease;
+  /* Added width transition */
+  overflow: hidden;
+  /* Hide overflow during width transition */
+  width: auto;
+  /* Default width */
+}
+
+.sidebar.collapsed .logo-text {
+  opacity: 0;
+  width: 0;
+}
+
+.nav-item {
+  margin: 0.25rem 0;
+}
+
+.nav-link {
+  color: var(--text-white);
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.2s;
+  border-radius: 0.5rem;
+  margin: 0 1rem;
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  background-color: #f3f4f6;
+  color: var(--text-primary);
+}
+
+.nav-link.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.nav-link i {
+  margin-right: 0.75rem;
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.nav-text {
+  transition: opacity 0.3s ease, width 0.3s ease;
+  /* Added width transition */
+  overflow: hidden;
+  /* Hide overflow during width transition */
+  width: auto;
+  /* Default width */
+}
+
+.sidebar.collapsed .nav-text {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+.sidebar.collapsed .nav-link {
+  justify-content: center;
+  margin: 0 0.5rem;
+  padding: 0.75rem 0.5rem;
+  position: relative;
+}
+
+.sidebar.collapsed .nav-link i {
+  margin-right: 0;
+  width: 20px;
+  text-align: center;
+}
+
+/* Tooltip for collapsed sidebar */
+.sidebar.collapsed .nav-link:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #1f2937;
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  z-index: 1001;
+  margin-left: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.stats-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-color);
+  height: 120px;
+  display: flex;
+  align-items: center;
+}
+
+.stats-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  flex-shrink: 0;
+}
+
+.stats-content {
+  flex: 1;
+  margin-left: 1rem;
+}
+
+.stats-number {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.stats-label {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.chart-container {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-color);
+}
+
+.chart-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.chart-tabs {
+  border: none;
+  margin-bottom: 1rem;
+}
+
+.chart-tabs .nav-link {
+  border: none;
+  color: var(--text-secondary);
+  margin: 0;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+
+.chart-tabs .nav-link.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--primary-color);
+}
+
+
+
+.notification-badge {
+  position: relative;
+}
+
+.notification-badge::after {
+  content: '5';
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ef4444;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.log-out-btn {
+  background-color: var(--primary-color);
+  border: none;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  margin: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+  white-space: nowrap;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.log-out-btn:hover {
+  background-color: #059669;
+}
+
+.sidebar.collapsed .log-out-btn {
+  padding: 0.75rem;
+  margin: 1rem 0.5rem;
+}
+
+.sidebar.collapsed .log-out-btn .btn-text {
+  display: none;
+}
+
+.sidebar-toggle {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.semester-info {
+  color: #10b981;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.capacity-info {
+  color: #f59e0b;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.deadline-warning {
+  color: #ef4444;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+/* Mobile overlay for sidebar */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1029;
+}
+
+.sidebar-overlay.show {
+  display: block;
+}
+
+/* User Profile Offcanvas & inherited Modal Styles */
+.offcanvas-header.modal-header {
+  background: linear-gradient(135deg, var(--primary-color), #059669);
+  color: white;
+  border-bottom: none;
+}
+
+.offcanvas-header.modal-header .btn-close {
+  filter: brightness(0) invert(1);
+}
+
+.profile-avatar-large {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 4px solid white;
+  margin: 0 auto 1rem;
+  display: block;
+}
+
+.profile-info {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.profile-detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.profile-detail:last-child {
+  border-bottom: none;
+}
+
+.profile-label {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.profile-value {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.role-badge {
+  background: var(--primary-color);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Footer Styles */
+.footer {
+  background-color: #fff;
+  border-top: 1px solid var(--border-color);
+  padding: 1.5rem 2rem;
+  margin-top: auto;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    width: var(--sidebar-width);
+  }
+
+  .sidebar.show {
+    transform: translateX(0);
+  }
+
+  .sidebar.collapsed {
+    /* On mobile, "collapsed" means hidden */
+    transform: translateX(-100%);
+  }
+
+  .sidebar.collapsed.show {
+    /* This combination should ideally not happen if logic is correct */
+    transform: translateX(0);
+    width: var(--sidebar-width);
+  }
+
+  .main-content {
+    margin-left: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .main-content.expanded {
+    /* On mobile, main content doesn't "expand" */
+    margin-left: 0;
+  }
+
+  .top-bar {
+    padding: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .top-bar .d-flex:first-child {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .top-bar .d-flex:last-child {
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+  }
+
+  .stats-card {
+    height: auto;
+    min-height: 120px;
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .stats-content {
+    margin-left: 0;
+    margin-top: 1rem;
+  }
+
+  .stats-number {
+    font-size: 1.5rem;
+  }
+
+  .chart-container {
+    padding: 1rem;
+  }
+
+  .chart-title {
+    font-size: 1rem;
+  }
+
+  .language-selector span {
+    display: none;
+  }
+
+  .table-responsive {
+    font-size: 0.875rem;
+  }
+
+  .btn-sm {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .footer {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .top-bar {
+    padding: 0.75rem;
+  }
+
+  .container-fluid {
+    padding: 1rem !important;
+  }
+
+  .stats-card {
+    padding: 0.75rem;
+  }
+
+  .stats-number {
+    font-size: 1.25rem;
+  }
+
+  .chart-container {
+    padding: 0.75rem;
+  }
+
+  .chart-tabs .nav-link {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  .user-profile {
+    gap: 0.5rem;
+  }
+
+  .language-selector {
+    gap: 0.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .top-bar .d-flex:last-child {
+    gap: 0.5rem !important;
+  }
+
+  .notification-badge::after {
+    width: 16px;
+    height: 16px;
+    font-size: 0.625rem;
+  }
+
+  .stats-number {
+    font-size: 1rem;
+  }
+
+  .stats-label {
+    font-size: 0.75rem;
+  }
+}
+
+/* tablecss */
+
+:root {
+  --main: 89, 17, 77;
+  /* Optional main theme color: #59114d */
+}
+
+/* Base styles for header controls - already well-structured for flexibility */
+.header-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  /* Allows items to wrap onto the next line if space is limited */
+  gap: 16px;
+  /* Provides consistent spacing between flex items */
+  width: 100%;
+  /* Ensures the container takes full available width */
+  padding: 10px 15px;
+  /* Added some padding for better spacing from screen edges */
+  box-sizing: border-box;
+  /* Ensures padding is included in the element's total width and height */
+}
+
+/* Export buttons container */
+.export-controls {
+  display: flex;
+  gap: 8px;
+  /* Spacing between the individual export buttons */
+  /* On mobile, if these buttons are too wide, they will wrap due to .header-controls flex-wrap */
+}
+
+/* Individual export button styling */
+.export-btn {
+  background-color: #10b981;
+  /* Green color */
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  /* Slightly reduced horizontal padding for better fit on small screens */
+  border-radius: 5px;
+  font-size: 13px;
+  /* Slightly increased font size from 12px to 13px for better readability on mobile */
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  /* Added ease-in-out for smoother transition */
+  white-space: nowrap;
+  /* Prevent text inside button from wrapping, keeping button text on one line */
+  flex-shrink: 0;
+  /* Prevents buttons from shrinking if space is tight, allowing them to wrap instead */
+}
+
+.export-btn:hover {
+  background-color: #059669;
+}
+
+.main-btn {
+  background-color:var(--background-secondary);
+  /* Green color */
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  /* Slightly reduced horizontal padding for better fit on small screens */
+  border-radius: 5px;
+  font-size: 13px;
+  /* Slightly increased font size from 12px to 13px for better readability on mobile */
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  /* Added ease-in-out for smoother transition */
+  white-space: nowrap;
+  /* Prevent text inside button from wrapping, keeping button text on one line */
+  flex-shrink: 0;
+  /* Prevents buttons from shrinking if space is tight, allowing them to wrap instead */
+}
+
+.main-btn:hover {
+  background-color:rgb(43, 86, 226);
+}
+
+
+/* Mobile-specific adjustments using a media query */
+/* Targeting screens up to typical phone width (e.g., 767px for Bootstrap's 'sm' breakpoint) */
+@media (max-width: 767px) {
+  .header-controls {
+    flex-direction: column;
+    /* Stack items vertically on very small screens */
+    align-items: flex-start;
+    /* Align items to the start when stacked */
+    gap: 12px;
+    /* Slightly reduce gap when stacked */
+    padding: 10px;
+    /* Adjust padding for smaller screens */
+  }
+
+  .export-controls {
+    width: 100%;
+    /* Make export buttons container take full width when stacked */
+    justify-content: space-around;
+    /* Distribute buttons horizontally within their container */
+    gap: 5px;
+    /* Reduce gap between buttons further for very small screens if necessary */
+  }
+
+  .export-btn {
+    padding: 10px 12px;
+    /* Slightly more vertical padding, less horizontal for better tap target */
+    font-size: 13px;
+    /* Keep font size consistent */
+    min-width: 80px;
+    /* Ensure buttons have a minimum tap area */
+    text-align: center;
+    /* Center text within buttons */
+    flex-grow: 1;
+    /* Allow buttons to grow and fill available space within .export-controls */
+  }
+}
+
+/* Further refinement for extremely small screens (e.g., narrow phones) */
+@media (max-width: 480px) {
+  .export-btn {
+    font-size: 12px;
+    /* Revert to smaller font size for very narrow screens if needed */
+    padding: 8px 10px;
+    /* Further reduce padding */
+  }
+}
+
+/* Search & filter section */
+/* Base styles (for desktop first, or general styles) */
+.search-filter-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  /* Adjust as needed for desktop */
+  flex-wrap: nowrap;
+  /* Prevent wrapping on desktop by default */
+}
+
+.search-container {
+  position: relative;
+  flex-grow: 1;
+  /* Allow search input to grow on desktop if space allows */
+}
+
+.search-input {
+  width: 256px;
+  /* Default width for desktop */
+  max-width: 100%;
+  /* Ensure it doesn't overflow its container */
+  padding: 8px 40px 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: white;
+  box-sizing: border-box;
+  /* Include padding and border in the element's total width and height */
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.search-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+  /* Make icon unclickable, allowing clicks to pass through to input */
+}
+
+/* Filter button (blue) */
+.filter-btn {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  /* Desktop padding */
+  border-radius: 5px;
+  font-size: 12px;
+  /* Desktop font size */
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  /* Desktop gap */
+  transition: background-color 0.2s;
+  white-space: nowrap;
+  /* Prevent button text from wrapping */
+}
+
+.filter-btn:hover {
+  background-color: #2563eb;
+}
+
+.filter-icon {
+  width: 16px;
+  height: 16px;
+}
+
+@media (max-width: 768px) {
+    /* Main container for search and filter controls */
+    .search-filter-controls {
+        flex-direction: column;       /* Stack items vertically */
+        align-items: stretch;         /* Stretch items to full width */
+        gap: 12px;                    /* Consistent spacing between stacked items */
+        padding: 0 15px;              /* Adds some horizontal padding for a clean look */
     }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background-color: #f9fafb;
+    /* Container for the search input */
+    .search-container {
+        width: 100%;                  /* Search input container takes full width */
     }
 
-    .sidebar {
-      height: 100vh;
-      background-color: var(--sidebar-bg);
-      border-right: 1px solid var(--border-color);
-      width: var(--sidebar-width); /* Default width */
-      position: fixed;
-      left: 0;
-      top: 0;
-      z-index: 1030;
-      transition: all 0.3s ease;
-      display: flex;
-      flex-direction: column;
+    /* The search input field itself */
+    .search-input {
+        width: 100%;                  /* Search input takes full width of its container */
+        font-size: 16px;              /* Slightly larger font for better readability */
+        padding: 12px 40px 12px 16px;  /* Increased padding for a larger touch target */
+        height: 44px;                 /* Minimum touch target size for accessibility */
     }
 
-    .sidebar.collapsed {
-      width: var(--sidebar-collapsed-width); /* Collapsed width */
-    }
-    
-    .sidebar .nav {
-        flex-grow: 1;
-        overflow-y: auto;
-        padding-bottom: 1rem;
+    /* Positioning of the search icon inside the input */
+    .search-icon {
+        right: 16px;                  /* Adjusts icon position relative to new padding */
     }
 
-    .main-content {
-      margin-left: var(--sidebar-width); /* Default margin for full sidebar */
-      padding: 0;
-      transition: margin-left 0.3s ease;
-      display: flex; /* Added for footer pushing to bottom */
-      flex-direction: column; /* Added for footer pushing to bottom */
-      min-height: 100vh; /* Added for footer pushing to bottom */
+    /* The filter button */
+    .filter-btn {
+        width: 26em;                  /* Filter button takes full width */
+        justify-content: center;      /* Center button content (text and icon) */
+        padding: 12px 20px;           /* Increased padding for a larger touch target */
+        font-size: 16px;              /* Larger font for readability */
+        height: 44px;                 /* Minimum touch target size for accessibility */
+    }
+}
+
+/* ----------------------------------------------------------------------- */
+/* Small Mobile Phones (up to 480px) */
+/* Further optimizes the layout for very small screens, ensuring no horizontal overflow. */
+@media (max-width: 480px) {
+    .search-filter-controls {
+        gap: 10px;                    /* Slightly reduce the gap for a more compact layout */
     }
 
-    .main-content.expanded {
-      margin-left: var(--sidebar-collapsed-width); /* Margin when sidebar is collapsed */
+    /* Adjustments for both the search input and filter button */
+    .search-input,
+    .filter-btn {
+        width: 100%;                  /* Ensure full width to prevent horizontal scrolling */
+        font-size: 15px;              /* Smallest font size for this breakpoint */
+        padding-top: 10px;            /* Reduce vertical padding slightly */
+        padding-bottom: 10px;         /* Reduce vertical padding slightly */
     }
 
-    .top-bar {
-      background: white;
-      border-bottom: 1px solid var(--border-color);
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      position: sticky;
-      top: 0;
-      z-index: 1020;
+    /* Remove the fixed margin from the filter button on small screens to ensure full width */
+    .filter-btn {
+        margin-right: 0;
     }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      padding: 1.5rem;
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: var(--primary-color);
-      text-decoration: none;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
-    .logo i {
-      margin-right: 0.5rem;
-    }
-
-    .logo-text {
-      transition: opacity 0.3s ease, width 0.3s ease; /* Added width transition */
-      overflow: hidden; /* Hide overflow during width transition */
-      width: auto; /* Default width */
-    }
-
-    .sidebar.collapsed .logo-text {
-      opacity: 0;
-      width: 0;
-    }
-
-    .nav-item {
-      margin: 0.25rem 0;
-    }
-
-    .nav-link {
-      color: var(--text-secondary);
-      padding: 0.75rem 1.5rem;
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      transition: all 0.2s;
-      border-radius: 0.5rem;
-      margin: 0 1rem;
-      white-space: nowrap;
-    }
-
-    .nav-link:hover {
-      background-color: #f3f4f6;
-      color: var(--text-primary);
-    }
-
-    .nav-link.active {
-      background-color: var(--primary-color);
-      color: white;
-    }
-
-    .nav-link i {
-      margin-right: 0.75rem;
-      width: 20px;
-      text-align: center;
-      flex-shrink: 0;
-    }
-
-    .nav-text {
-      transition: opacity 0.3s ease, width 0.3s ease; /* Added width transition */
-      overflow: hidden; /* Hide overflow during width transition */
-      width: auto; /* Default width */
-    }
-
-    .sidebar.collapsed .nav-text {
-      opacity: 0;
-      width: 0;
-      overflow: hidden;
-    }
-
-    .sidebar.collapsed .nav-link {
-      justify-content: center;
-      margin: 0 0.5rem;
-      padding: 0.75rem 0.5rem;
-      position: relative;
-    }
-
-    .sidebar.collapsed .nav-link i {
-      margin-right: 0;
-      width: 20px;
-      text-align: center;
-    }
-
-    /* Tooltip for collapsed sidebar */
-    .sidebar.collapsed .nav-link:hover::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      left: 100%;
-      top: 50%;
-      transform: translateY(-50%);
-      background: #1f2937;
-      color: white;
-      padding: 0.5rem 0.75rem;
-      border-radius: 0.5rem;
-      font-size: 0.875rem;
-      white-space: nowrap;
-      z-index: 1001;
-      margin-left: 0.5rem;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .stats-card {
-      background: white;
-      border-radius: 1rem;
-      padding: 1.5rem;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-      border: 1px solid var(--border-color);
-      height: 120px;
-      display: flex;
-      align-items: center;
-    }
-
-    .stats-icon {
-      width: 60px;
-      height: 60px;
-      border-radius: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      color: white;
-      flex-shrink: 0;
-    }
-
-    .stats-content {
-      flex: 1;
-      margin-left: 1rem;
-    }
-
-    .stats-number {
-      font-size: 2rem;
-      font-weight: bold;
-      color: var(--text-primary);
-      line-height: 1;
-    }
-
-    .stats-label {
-      color: var(--text-secondary);
-      font-size: 0.875rem;
-      margin-top: 0.25rem;
-    }
-
-    .chart-container {
-      background: white;
-      border-radius: 1rem;
-      padding: 1.5rem;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-      border: 1px solid var(--border-color);
-    }
-
-    .chart-title {
-      font-size: 1.125rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 1rem;
-    }
-
-    .chart-tabs {
-      border: none;
-      margin-bottom: 1rem;
-    }
-
-    .chart-tabs .nav-link {
-      border: none;
-      color: var(--text-secondary);
-      margin: 0;
-      padding: 0.5rem 1rem;
-      border-radius: 0.5rem;
-    }
-
-    .chart-tabs .nav-link.active {
-      background-color: var(--primary-color);
-      color: white;
-    }
-
-    .user-profile {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      cursor: pointer;
-    }
-
-    .user-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: 2px solid var(--primary-color);
-    }
-
-    .language-selector {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--text-secondary);
-    }
-
-    .notification-badge {
-      position: relative;
-    }
-
-    .notification-badge::after {
-      content: '5';
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      background: #ef4444;
-      color: white;
-      border-radius: 50%;
-      width: 18px;
-      height: 18px;
-      font-size: 0.75rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .log-out-btn {
-      background-color: var(--primary-color);
-      border: none;
-      color: white;
-      padding: 0.75rem 1.5rem;
-      border-radius: 0.5rem;
-      margin: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      transition: all 0.2s;
-      white-space: nowrap;
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-
-    .log-out-btn:hover {
-      background-color: #059669;
-    }
-
-    .sidebar.collapsed .log-out-btn {
-      padding: 0.75rem;
-      margin: 1rem 0.5rem;
-    }
-
-    .sidebar.collapsed .log-out-btn .btn-text {
-      display: none;
-    }
-
-    .sidebar-toggle {
-      background: none;
-      border: none;
-      color: var(--text-secondary);
-      font-size: 1.2rem;
-      padding: 0.5rem;
-      cursor: pointer;
-    }
-
-    .semester-info {
-      color: #10b981;
-      font-size: 0.875rem;
-      font-weight: 600;
-    }
-
-    .capacity-info {
-      color: #f59e0b;
-      font-size: 0.875rem;
-      font-weight: 600;
-    }
-
-    .deadline-warning {
-      color: #ef4444;
-      font-size: 0.875rem;
-      font-weight: 600;
-    }
-
-    /* Mobile overlay for sidebar */
-    .sidebar-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 1029;
-    }
-
-    .sidebar-overlay.show {
-      display: block;
-    }
-
-    /* User Profile Offcanvas & inherited Modal Styles */
-    .offcanvas-header.modal-header {
-      background: linear-gradient(135deg, var(--primary-color), #059669);
-      color: white;
-      border-bottom: none;
-    }
-
-    .offcanvas-header.modal-header .btn-close {
-      filter: brightness(0) invert(1);
-    }
-
-    .profile-avatar-large {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      border: 4px solid white;
-      margin: 0 auto 1rem;
-      display: block;
-    }
-
-    .profile-info {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    .profile-detail {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.75rem 0;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    .profile-detail:last-child {
-      border-bottom: none;
-    }
-
-    .profile-label {
-      font-weight: 600;
-      color: var(--text-secondary);
-    }
-
-    .profile-value {
-      color: var(--text-primary);
-      font-weight: 500;
-    }
-
-    .role-badge {
-      background: var(--primary-color);
-      color: white;
-      padding: 0.25rem 0.75rem;
-      border-radius: 1rem;
-      font-size: 0.875rem;
-      font-weight: 500;
-    }
-    
-    /* Footer Styles */
-    .footer {
-        background-color: #fff;
-        border-top: 1px solid var(--border-color);
-        padding: 1.5rem 2rem;
-        margin-top: auto;
-        color: var(--text-secondary);
-        font-size: 0.875rem;
-        text-align: center;
-    }
-
-
-    /* Mobile Responsive Styles */
-    @media (max-width: 768px) {
-      .sidebar {
-        transform: translateX(-100%);
-        width: var(--sidebar-width);
-      }
-
-      .sidebar.show {
-        transform: translateX(0);
-      }
-
-      .sidebar.collapsed { /* On mobile, "collapsed" means hidden */
-        transform: translateX(-100%);
-      }
-
-      .sidebar.collapsed.show { /* This combination should ideally not happen if logic is correct */
-        transform: translateX(0);
-        width: var(--sidebar-width);
-      }
-
-      .main-content {
-        margin-left: 0;
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-      }
-
-      .main-content.expanded { /* On mobile, main content doesn't "expand" */
-        margin-left: 0;
-      }
-
-      .top-bar {
-        padding: 1rem;
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .top-bar .d-flex:first-child {
-        width: 100%;
-        justify-content: space-between;
-      }
-
-      .top-bar .d-flex:last-child {
-        width: 100%;
-        justify-content: flex-end;
-        margin-top: 0.5rem;
-      }
-
-      .stats-card {
-        height: auto;
-        min-height: 120px;
-        flex-direction: column;
-        text-align: center;
-        padding: 1rem;
-      }
-
-      .stats-content {
-        margin-left: 0;
-        margin-top: 1rem;
-      }
-
-      .stats-number {
-        font-size: 1.5rem;
-      }
-
-      .chart-container {
-        padding: 1rem;
-      }
-
-      .chart-title {
-        font-size: 1rem;
-      }
-
-      .language-selector span {
-        display: none;
-      }
-
-      .table-responsive {
-        font-size: 0.875rem;
-      }
-
-      .btn-sm {
-        font-size: 0.75rem;
-        padding: 0.25rem 0.5rem;
-      }
-      .footer {
-          padding: 1rem;
-      }
-    }
-
-    @media (max-width: 576px) {
-      .top-bar {
-        padding: 0.75rem;
-      }
-
-      .container-fluid {
-        padding: 1rem !important;
-      }
-
-      .stats-card {
-        padding: 0.75rem;
-      }
-
-      .stats-number {
-        font-size: 1.25rem;
-      }
-
-      .chart-container {
-        padding: 0.75rem;
-      }
-
-      .chart-tabs .nav-link {
-        padding: 0.375rem 0.75rem;
-        font-size: 0.875rem;
-      }
-
-      .user-profile {
-        gap: 0.5rem;
-      }
-
-      .language-selector {
-        gap: 0.25rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .top-bar .d-flex:last-child {
-        gap: 0.5rem !important;
-      }
-
-      .notification-badge::after {
-        width: 16px;
-        height: 16px;
-        font-size: 0.625rem;
-      }
-
-      .stats-number {
-        font-size: 1rem;
-      }
-
-      .stats-label {
-        font-size: 0.75rem;
-      }
-    }
+}
+
+/* onprinting */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #printsection,
+  #printsection * {
+    visibility: visible;
+  }
+
+  #printsection {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+}
+
+.table th {
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #fff;
+  background-color: rgba(90, 5, 90, 0.623);
+}
+
+.table td {
+  font-size: 0.9rem;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+
+.pagination .page-link {
+  border-radius: 30px;
+  color: #333;
+}
+
+.pagination .active .page-link {
+  background-color: #343a40;
+  color: #fff;
+  border-color: #343a40;
+}

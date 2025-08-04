@@ -1,7 +1,7 @@
     <div class="sidebar" id="sidebar">
         <a href="#" class="logo flex-shrink-0">
-            <i class="fas fa-bible  text-white"></i>
-            <span class="logo-text text-white">REGSTAR </span>
+            <i class="fas fa-bible"></i>
+            <span class="logo-text">REGSTAR </span>
         </a>
 
         <nav class="nav flex-column">
@@ -12,7 +12,7 @@
                 </a>
             </div>
             <div class="nav-item">
-                <a class="nav-link" href="../../views/students/studentlist.php" data-tooltip="Student Registration">
+                <a class="nav-link" href="#" data-tooltip="Student Registration">
                     <i class="fas fa-user-plus"></i>
                     <span class="nav-text">Student Registration</span>
                 </a>
@@ -24,12 +24,10 @@
                 </a>
             </div>
             <div class="nav-item">
-                
-                <a class="nav-link" href="../../views/temp/form.php" data-tooltip="Students">
+                <a class="nav-link" href="../../views/students/studentlist.php" data-tooltip="Students">
                     <i class="fas fa-users"></i>
-                    <span class="nav-text">Reuse Form</span>
+                    <span class="nav-text">Students</span>
                 </a>
-               
             </div>
             <div class="nav-item">
                 <a class="nav-link" href="#" data-tooltip="Schedule">

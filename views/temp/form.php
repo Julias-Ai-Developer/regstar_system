@@ -314,39 +314,17 @@
                     <div class="registration-header">
                         <h1 class="registration-title">
                             <i class="ti ti-user-plus"></i>
-                            STUDENT REGISTRATION
+                           REGISTER STUDENTS
                         </h1>
-                        <div class="step-indicator" id="stepIndicator">STEP 1 OF 4</div>
                     </div>
 
-                    <div class="progress-steps">
-                        <div class="progress-line"></div>
-                        <div class="progress-line-active" id="progressLineActive" style="width: 25%;"></div>
-
-                        <div class="step-item">
-                            <div class="step-circle active" id="stepCircle1">1</div>
-                            <div class="step-label active" id="stepLabel1">Student Details</div>
-                        </div>
-                        <div class="step-item">
-                            <div class="step-circle" id="stepCircle2">2</div>
-                            <div class="step-label" id="stepLabel2">Parent Details</div>
-                        </div>
-                        <div class="step-item">
-                            <div class="step-circle" id="stepCircle3">3</div>
-                            <div class="step-label" id="stepLabel3">Additional Information</div>
-                        </div>
-                        <div class="step-item">
-                            <div class="step-circle" id="stepCircle4">4</div>
-                            <div class="step-label" id="stepLabel4">Confirm</div>
-                        </div>
-                    </div>
+                   
                     <div class="card-body">
                         <form id="wizardForm" class="needs-validation" novalidate>
 
                             <div class="form-content">
 
                                 <div class="form-section active" id="step1">
-                                    <h2 class="section-title">Provide Student details</h2>
 
                                     <div class="row g-3">
                                         <div class="col-md-6">
@@ -412,125 +390,21 @@
                                             <div class="invalid-feedback">Please select entry date.</div>
                                         </div>
 
-                                        <div class="col-12">
-                                            <label class="form-label">Student Photo</label>
-                                            <div class="file-upload-container">
-                                                <label for="studentPhoto" class="file-upload-label">
-                                                    <i class="ti ti-camera me-2"></i>
-                                                    <span id="fileLabel">Choose File - No file chosen</span>
-                                                </label>
-                                                <input type="file" id="studentPhoto" class="file-upload-input" accept="image/*">
-                                            </div>
-                                        </div>
+                                   
                                         
                                     </div>
                                 </div>
 
-                                <div class="form-section" id="step2">
-                                    <h2 class="section-title">Parent/Guardian Details</h2>
+                           
 
-                                    <div class="row g-3">
-                                        <div class="col-md-6">
-                                            <label for="fatherName" class="form-label">Father's Name <span class="required-field">*</span></label>
-                                            <input type="text" class="form-control" id="fatherName" required>
-                                            <div class="invalid-feedback">Please enter father's name.</div>
-                                        </div>
+                           
 
-                                        <div class="col-md-6">
-                                            <label for="motherName" class="form-label">Mother's Name <span class="required-field">*</span></label>
-                                            <input type="text" class="form-control" id="motherName" required>
-                                            <div class="invalid-feedback">Please enter mother's name.</div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <label for="fatherContact" class="form-label">Father's Contact <span class="required-field">*</span></label>
-                                            <input type="tel" class="form-control" id="fatherContact" required>
-                                            <div class="invalid-feedback">Please enter father's contact.</div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <label for="motherContact" class="form-label">Mother's Contact <span class="required-field">*</span></label>
-                                            <input type="tel" class="form-control" id="motherContact" required>
-                                            <div class="invalid-feedback">Please enter mother's contact.</div>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <label for="guardianEmail" class="form-label">Guardian Email</label>
-                                            <input type="email" class="form-control" id="guardianEmail" placeholder="guardian@example.com">
-                                        </div>
-
-                                        <div class="col-12">
-                                            <label for="emergencyContact" class="form-label">Emergency Contact <span class="required-field">*</span></label>
-                                            <input type="tel" class="form-control" id="emergencyContact" required>
-                                            <div class="invalid-feedback">Please enter emergency contact.</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-section" id="step3">
-                                    <h2 class="section-title">Additional Information</h2>
-
-                                    <div class="row g-3">
-                                        <div class="col-md-6">
-                                            <label for="previousSchool" class="form-label">Previous School</label>
-                                            <input type="text" class="form-control" id="previousSchool">
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <label for="classGrade" class="form-label">Class/Grade <span class="required-field">*</span></label>
-                                            <select class="form-select" id="classGrade" required>
-                                                <option value="">Select class/grade</option>
-                                                <option value="nursery">Nursery</option>
-                                                <option value="primary1">Primary 1</option>
-                                                <option value="primary2">Primary 2</option>
-                                                <option value="primary3">Primary 3</option>
-                                                <option value="primary4">Primary 4</option>
-                                                <option value="primary5">Primary 5</option>
-                                                <option value="primary6">Primary 6</option>
-                                                <option value="primary7">Primary 7</option>
-                                            </select>
-                                            <div class="invalid-feedback">Please select class/grade.</div>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <label for="medicalConditions" class="form-label">Medical Conditions</label>
-                                            <textarea class="form-control" id="medicalConditions" rows="3" placeholder="Any medical conditions or allergies (optional)"></textarea>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <label for="specialRequirements" class="form-label">Special Requirements</label>
-                                            <textarea class="form-control" id="specialRequirements" rows="3" placeholder="Any special educational requirements (optional)"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-section" id="step4">
-                                    <h2 class="section-title">Confirm Registration Details</h2>
-
-                                    <div class="alert alert-info">
-                                        <h5><i class="ti ti-info-circle me-2"></i>Please review all information before submitting</h5>
-                                        <p class="mb-0">Make sure all details are correct as they will be used for official records.</p>
-                                    </div>
-
-                                    <div id="confirmationDetails" class="mb-3">
-                                        </div>
-
-                                    <div class="form-check mt-3">
-                                        <input class="form-check-input" type="checkbox" id="confirmAccuracy" required>
-                                        <label class="form-check-label" for="confirmAccuracy">
-                                            I confirm that all information provided is accurate and complete <span class="required-field">*</span>
-                                        </label>
-                                        <div class="invalid-feedback">Please confirm the accuracy of information.</div>
-                                    </div>
-                                </div>
 
                                 <div class="form-navigation">
-                                    <button type="button" class="btn-custom btn-secondary-custom" id="prevBtn" onclick="changeStep(-1)" style="display: none;">
-                                        <i class="ti ti-arrow-left me-2"></i>Previous
-                                    </button>
+                                 
                                     <div></div>
-                                    <button type="button" class="btn-custom btn-primary-custom" id="nextBtn" onclick="changeStep(1)">
-                                        Continue <i class="fas fa-arrow-right ms-2"></i>
+                                    <button type="button" class="btn btn-primary round" id="nextBtn" onclick="changeStep(1)">
+                                       Submit <i class="fas fa-arrow-right ms-2"></i>
                                     </button>
                                 </div>
 
